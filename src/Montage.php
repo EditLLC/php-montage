@@ -26,6 +26,7 @@ class Montage
     {
         $this->subdomain = $subdomain;
         $this->version = $version;
+        $this->debug = false;
         $this->token = $token;
 
         return $this;
@@ -41,6 +42,18 @@ class Montage
     public function __call($name, $args)
     {
         return new Schema($name, $this);
+    }
+
+    /**
+     * Enable / disable debug info when making api calls.
+     *
+     * @param bool $debug
+     * @return $this
+     */
+    public function setDebug($debug = false)
+    {
+        $this->debug = $debug;
+        return $this;
     }
 
     /**
@@ -96,6 +109,24 @@ class Montage
     }
 
     /**
+     * @return mixed
+     * @throws MontageAuthException
+     */
+    public function getUser()
+    {
+        if (!$this->token)
+        {
+            throw new MontageAuthException('Must provide $token before getting a user.');
+        }
+
+        try {
+            return $this->request('get', $this->url('auth'));
+        } catch (ClientException $e) {
+            throw new MontageAuthException(sprintf('Could not retrieve a user with token %s', $this->token));
+        }
+    }
+
+    /**
      * Gets a formatted Montage endpoint, prefixed with api version.
      *
      * @param $endpoint
@@ -124,14 +155,22 @@ class Montage
                 'http://%s.%s/',
                 $this->subdomain,
                 $this->domain
-            )
+            ),
+            'Accept' => 'application/json',
+            'User-Agent' => sprintf('Montage PHP v%d', $this->version),
         ];
 
+        //Set the token if it exists
         if ($this->token)
         {
            $config['headers'] = [
                'Authorization' => sprintf('Token %s', $this->token)
            ];
+        }
+
+        if ($this->debug)
+        {
+            $config['debug'] = true;
         }
 
         return new Client($config);
@@ -177,6 +216,16 @@ class Montage
         }
 
         return $endpoints[$endpoint];
+    }
+
+    /**
+     * Get a list of all schemas for the given users token.
+     *
+     * @return mixed
+     */
+    public function schemas()
+    {
+        return $this->request('get', $this->url('schema-list'));
     }
 
     /**
