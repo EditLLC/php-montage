@@ -1,5 +1,6 @@
 <?php namespace Montage;
 
+use Montage\Exceptions\MontageException;
 use Montage\Exceptions\MontageUnknownEndpointException;
 use Montage\Exceptions\MontageGeneralException;
 use Montage\Exceptions\MontageAuthException;
@@ -191,6 +192,16 @@ class Schema
      * @var
      */
     public $name;
+
+    public function __get($name)
+    {
+        if (!method_exists($this, $name))
+        {
+            throw new MontageException(sprintf('Unknown method or property "%s" called.', $name));
+        }
+
+        return $this->$name();
+    }
 
     /**
      * @param $name

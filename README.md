@@ -18,7 +18,7 @@ $moviesSchema = $montage->schema('movies');
 $movieSchema = $montage->movies(); 
 
 //Documents is an iterable object of the schema documents
-foreach ($moviesSchema->documents() as $movie) {
+foreach ($moviesSchema->documents as $movie) {
     echo sprintf("Movie Title: %s\n", $movie->title);
 }
 ```
@@ -30,6 +30,32 @@ the need to call the `auth` function.
 
 ```
 $montage = (new Montage('yourSubdomain', $token);
+```
+
+If you need to provide more fine grained control you can call documents as a function and pass to a `$queryDescriptor` 
+as an array.  Possible array members for a `$queryDescriptor` include:
+
+```
+[
+    'filter' => [],
+    'limit' => null,
+    'offset' => null,
+    'order_by' => null,
+    'ordering' => 'asc|desc',
+    'batch_size' => 1000,
+]
+```
+
+Documents called as a function can look like:
+
+```
+$queryDescriptor = [
+    'limit' => 5
+];
+
+foreach ($moviesSchema->documents($queryDescriptor) as $movie) {
+    echo sprintf("Movie Title: %s\n", $movie->title);
+}
 ```
 
 
