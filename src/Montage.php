@@ -303,7 +303,8 @@ class Documents implements \IteratorAggregate {
         //Set the documents
         $this->documents = $query->execute();
 
-        //Return them
+        //Return the documents as an ArrayIterator to satisfy the requirements
+        //of the getIterator function.
         return new \ArrayIterator($this->documents);
     }
 
