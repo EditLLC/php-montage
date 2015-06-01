@@ -1,18 +1,21 @@
 {
-    "name": "ggoforth/php-montage",
-    "description": "PHP library for Montage.",
-    "authors": [
-        {
-            "name": "Greg Goforth",
-            "email": "ggoforth@shift3tech.com"
-        }
-    ],
-    "require": {
-        "guzzlehttp/guzzle": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {
-            "Montage\\": "src/"
-        }
+  "name": "ggoforth/php-montage",
+  "description": "PHP library for Montage.",
+  "authors": [
+    {
+      "name": "Greg Goforth",
+      "email": "ggoforth@shift3tech.com"
     }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "dev-master"
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Montage\\": "src/"
+    }
+  }
 }
