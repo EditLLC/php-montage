@@ -1,10 +1,9 @@
 <?php namespace Montage;
 
-use Montage\Exceptions\MontageException;
 use Montage\Exceptions\MontageUnknownEndpointException;
-use Montage\Exceptions\MontageGeneralException;
 use Montage\Exceptions\MontageAuthException;
 use GuzzleHttp\Exception\ClientException;
+use Montage\Exceptions\MontageException;
 use GuzzleHttp\Client;
 
 /**
@@ -430,7 +429,7 @@ class Query {
     {
         if (!in_array($ordering, ['asc', 'desc']))
         {
-            throw new MontageGeneralException('$ordering must be asc or desc.');
+            throw new MontageException('$ordering must be asc or desc.');
         }
 
         return $this->update(['order_by' => $orderby, 'ordering' => $ordering]);
