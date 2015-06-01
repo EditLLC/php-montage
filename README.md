@@ -50,7 +50,10 @@ Documents called as a function can look like:
 
 ```
 $queryDescriptor = [
-    'limit' => 5
+    'limit' => 5,
+    'filter' => [
+        'title__icontains' => 'the'
+    ]
 ];
 
 foreach ($moviesSchema->documents($queryDescriptor) as $movie) {

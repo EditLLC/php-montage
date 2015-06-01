@@ -223,9 +223,15 @@ class Montage
      *
      * @return mixed
      */
-    public function schemas()
+    public function schemas($schemaId = null)
     {
-        return $this->request('get', $this->url('schema-list'));
+        if (is_null($schemaId)) {
+            $url = $this->url('schema-list');
+        } else {
+            $url = $this->url('schema-detail', $schemaId);
+        }
+
+        return $this->request('get', $url);
     }
 
     /**
@@ -347,9 +353,9 @@ class Documents implements \IteratorAggregate {
     {
         //Run the query
         $query = new Query($this->schema, $this->queryDescriptor);
+        $query->execute();
 
-        //Set the documents
-        $this->documents = $query->execute();
+        $this->documents = $query->data;
 
         //Return the documents as an ArrayIterator to satisfy the requirements
         //of the getIterator function.
@@ -384,6 +390,20 @@ class Query {
     private $schema;
 
     /**
+     * The results of the query.
+     *
+     * @var array
+     */
+    public $data = [];
+
+    /**
+     * Any cursors sent back as the result of a request.
+     *
+     * @var
+     */
+    public $cursors;
+
+    /**
      * @param Schema $schema
      * @param array $queryDescriptor
      */
@@ -404,7 +424,8 @@ class Query {
         $name = $this->schema->name;
         $query = ['query' => ['query' => json_encode($this->descriptor)]];
         $response = $this->montage->request('get', $this->montage->url('document-query', $name), $query);
-        return $response->data;
+        $this->cursors = $response->cursors;
+        $this->data = $response->data;
     }
 
 
