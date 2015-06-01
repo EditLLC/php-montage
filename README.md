@@ -1,6 +1,7 @@
 # PHP Wrapper for Edit LLC's Montage API
 
-This is a PHP wrapper class that gives easy access to Edit LLC's Montage API.  Useage:
+This is a PHP wrapper class that gives easy access to Edit LLC's Montage API.  Note: this is **very much an alpha package
+and not all functions of the package are complete**. Useage:
 
 ```
 require "vendor/autoload.php";
