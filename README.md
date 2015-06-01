@@ -29,7 +29,7 @@ If you already posess a Montage API token you can construct the `Montage` instan
 the need to call the `auth` function.
 
 ```
-$montage = (new Montage('yourSubdomain', $token);
+$montage = new Montage('yourSubdomain', $token);
 ```
 
 If you need to provide more fine grained control you can call documents as a function and pass to a `$queryDescriptor` 
