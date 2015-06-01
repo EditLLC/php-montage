@@ -24,7 +24,8 @@ foreach ($moviesSchema->documents() as $doc) {
 
 The `->auth($username, $password)` will authenticate with Montage, and set a `$token` on the Montage class instance. 
 The token is required for making calls against the api, and is sent on all api requests as an `Authorization` header.
-If you already posess a Montage API token you can construct the `Montage` instance by providing your token:
+If you already posess a Montage API token you can construct the `Montage` instance by providing your token and bypass 
+the need to call the `auth` function.
 
 ```
 $montage = (new Montage('yourSubdomain', $token);
