@@ -8,8 +8,8 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Client;
 
 /**
- * Class src
- * @package src
+ * Class Montage
+ * @package Montage
  */
 class Montage
 {
@@ -33,7 +33,7 @@ class Montage
     }
 
     /**
-     * Access a Schema directly as a method of the src API class.
+     * Access a Schema directly as a method of the Montage API class.
      *
      * @param $name
      * @param $args
@@ -86,7 +86,7 @@ class Montage
             $this->token = $response->data->token;
             return $this;
         } catch (ClientException $e) {
-            throw new MontageAuthException('Could not authenticate with src.');
+            throw new MontageAuthException('Could not authenticate with Montage.');
         }
     }
 
@@ -179,7 +179,7 @@ class Montage
 
 /**
  * Class Schema
- * @package src
+ * @package Montage
  */
 class Schema
 {
@@ -233,7 +233,7 @@ class Schema
 
 /**
  * Class Documents
- * @package src
+ * @package Montage
  */
 class Documents implements \IteratorAggregate {
 
@@ -291,7 +291,7 @@ class Documents implements \IteratorAggregate {
 
 /**
  * Class Query
- * @package src
+ * @package Montage
  */
 class Query {
 
