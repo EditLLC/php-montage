@@ -45,6 +45,10 @@ class Montage
     }
 
     /**
+     * Our main request method to Montage.  Uses Guzzle under
+     * the hood to make the request, and will return the
+     * json_decoded response from Montage.
+     *
      * @param $type
      * @param $url
      * @param array $args
@@ -61,6 +65,8 @@ class Montage
     }
 
     /**
+     * Authenticate with Montage and set the local token.
+     *
      * @param null $user
      * @param null $password
      * @return $this
@@ -91,6 +97,8 @@ class Montage
     }
 
     /**
+     * Gets a formatted Montage endpoint, prefixed with api version.
+     *
      * @param $endpoint
      * @param null $schema
      * @param null $doc_id
@@ -105,6 +113,9 @@ class Montage
     }
 
     /**
+     * Does what it says.  Gets a guzzle client, with an Authorization header
+     * set in case of an existing token.
+     *
      * @return Client
      */
     private function getGuzzleClient()
@@ -128,6 +139,8 @@ class Montage
     }
 
     /**
+     * Creates a formatted Montage API endpoint string.
+     *
      * @param $endpoint
      * @param null $schema
      * @param null $doc_id
@@ -168,6 +181,8 @@ class Montage
     }
 
     /**
+     * Set the Schema for this instance of Montage.
+     *
      * @param $name
      * @return Schema
      */
@@ -222,6 +237,8 @@ class Schema
     }
 
     /**
+     * Returns the details of a specific Montage schema.
+     *
      * @return mixed
      */
     public function detail()
@@ -273,6 +290,9 @@ class Documents implements \IteratorAggregate {
     }
 
     /**
+     * The Documents class implements IteratorAggregate, so this function is required :)
+     * This is used when attempting to iterate over a list of documents.
+     *
      * @return \ArrayIterator
      */
     public function getIterator()
@@ -326,6 +346,8 @@ class Query {
     }
 
     /**
+     * Execute the given query and return the response data.
+     *
      * @return mixed
      */
     public function execute()
@@ -338,6 +360,9 @@ class Query {
 
 
     /**
+     * Merge in a provided $config and return the result for passing
+     * over to the Montage API via a query string.
+     *
      * @param $config
      * @return array
      */

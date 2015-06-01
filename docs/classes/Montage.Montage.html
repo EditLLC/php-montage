@@ -114,7 +114,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">40</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">30</span>
                                 </a>
                             </li>
                             <li>
@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2044562048"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-83160380"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2044562048" class="accordion-body collapse in">
+            <div id="namespace-83160380" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-991014799"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-686329107"></a>
                                 <a href="../namespaces/Montage.html" style="margin-left: 30px; padding-left: 0">Montage</a>
             </div>
-            <div id="namespace-991014799" class="accordion-body collapse ">
+            <div id="namespace-686329107" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-446011038"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-382070190"></a>
                                 <a href="../namespaces/Montage.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
             </div>
-            <div id="namespace-446011038" class="accordion-body collapse ">
+            <div id="namespace-382070190" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -427,7 +427,9 @@
                 <h3 class="public ">request()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">request(  <span class="argument">$type</span>,   <span class="argument">$url</span>, array  <span class="argument">$args = array()</span>) : mixed</pre>
-                <p><em></em></p>
+                <p><em>Our main request method to Montage.  Uses Guzzle under
+the hood to make the request, and will return the
+json_decoded response from Montage.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -473,7 +475,7 @@
                 <h3 class="public ">auth()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">auth(null  <span class="argument">$user = null</span>, null  <span class="argument">$password = null</span>) : $this</pre>
-                <p><em></em></p>
+                <p><em>Authenticate with Montage and set the local token.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -519,7 +521,7 @@
                 <h3 class="public ">url()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">url(  <span class="argument">$endpoint</span>, null  <span class="argument">$schema = null</span>, null  <span class="argument">$doc_id = null</span>, null  <span class="argument">$file_id = null</span>) : string</pre>
-                <p><em></em></p>
+                <p><em>Gets a formatted Montage endpoint, prefixed with api version.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -575,7 +577,7 @@
                 <h3 class="public ">schema()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">schema(  <span class="argument">$name</span>) : \Montage\Schema</pre>
-                <p><em></em></p>
+                <p><em>Set the Schema for this instance of Montage.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -611,7 +613,8 @@
                 <h3 class="private ">getGuzzleClient()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getGuzzleClient() : \GuzzleHttp\Client</pre>
-                <p><em></em></p>
+                <p><em>Does what it says.  Gets a guzzle client, with an Authorization header
+set in case of an existing token.</em></p>
                 
 
                 
@@ -639,7 +642,7 @@
                 <h3 class="private ">endpoint()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">endpoint(  <span class="argument">$endpoint</span>, null  <span class="argument">$schema = null</span>, null  <span class="argument">$doc_id = null</span>, null  <span class="argument">$file_id = null</span>) : string</pre>
-                <p><em></em></p>
+                <p><em>Creates a formatted Montage API endpoint string.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -738,7 +741,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 1st, 2015 at 03:13.
+                    on June 1st, 2015 at 03:23.
                 </section>
             </section>
         </section>
