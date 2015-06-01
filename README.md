@@ -18,8 +18,8 @@ $moviesSchema = $montage->schema('movies');
 $movieSchema = $montage->movies(); 
 
 //Documents is an iterable object of the schema documents
-foreach ($moviesSchema->documents() as $doc) {
-    echo sprintf("Movie Title: %s\n", $doc->title);
+foreach ($moviesSchema->documents() as $movie) {
+    echo sprintf("Movie Title: %s\n", $movie->title);
 }
 ```
 
