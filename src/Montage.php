@@ -393,7 +393,7 @@ class Documents implements \IteratorAggregate {
             return $this;
         }
 
-        throw new MontageException(sprintf('Could not find method "%s" as part of the docuemnt query.'));
+        throw new MontageException(sprintf('Could not find method "%s" as part of the document query.'));
     }
 
     public function save(){}
