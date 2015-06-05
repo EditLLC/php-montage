@@ -102,6 +102,7 @@ class Montage
             ]);
 
             $this->token = $response->data->token;
+
             return $this;
         } catch (ClientException $e) {
             throw new MontageAuthException('Could not authenticate with Montage.');
@@ -114,15 +115,27 @@ class Montage
      */
     public function getUser()
     {
+        $this->requireToken();
+
+        try {
+            return $this->request('get', $this->url('user'));
+        } catch (ClientException $e) {
+            throw new MontageAuthException(sprintf('Could not retrieve a user with token %s', $this->token));
+        }
+    }
+
+    /**
+     * On functions that require a token before preceeding, this will
+     * check for the token existence and throw an exception in
+     * case that it doesn't exist.
+     *
+     * @throws MontageAuthException
+     */
+    private function requireToken()
+    {
         if (!$this->token)
         {
             throw new MontageAuthException('Must provide $token before getting a user.');
-        }
-
-        try {
-            return $this->request('get', $this->url('auth'));
-        } catch (ClientException $e) {
-            throw new MontageAuthException(sprintf('Could not retrieve a user with token %s', $this->token));
         }
     }
 
@@ -190,13 +203,14 @@ class Montage
     {
         $endpoints = [
             'auth' => 'auth/',
+            'user' => 'auth/user/',
             'schema-list' => 'schemas/',
             'schema-detail' => 'schemas/%s/',
             'document-query' => 'schemas/%s/query/',
             'document-save' => 'schemas/%s/save/',
             'document-detail' => 'schemas/%s/%s/',
             'file-list' => 'files/',
-            'file-detail' => 'files/%s',
+            'file-detail' => 'files/%s/',
         ];
 
         if (!array_key_exists($endpoint, $endpoints))
@@ -223,15 +237,14 @@ class Montage
      *
      * @return mixed
      */
-    public function schemas($schemaId = null)
+    public function schemas($schemaName = null)
     {
-        if (is_null($schemaId)) {
+        if (is_null($schemaName)) {
             $url = $this->url('schema-list');
-        } else {
-            $url = $this->url('schema-detail', $schemaId);
+            return $this->request('get', $url);
         }
 
-        return $this->request('get', $url);
+        return $this->schema($schemaName);
     }
 
     /**
@@ -341,6 +354,7 @@ class Documents implements \IteratorAggregate {
     {
         $this->queryDescriptor = $queryDescriptor;
         $this->schema = $schema;
+        $this->query = new Query($schema, $queryDescriptor);
     }
 
     /**
@@ -352,10 +366,10 @@ class Documents implements \IteratorAggregate {
     public function getIterator()
     {
         //Run the query
-        $query = new Query($this->schema, $this->queryDescriptor);
-        $query->execute();
+        $this->query->execute();
 
-        $this->documents = $query->data;
+        //get the data from the query
+        $this->documents = $this->query->data;
 
         //Return the documents as an ArrayIterator to satisfy the requirements
         //of the getIterator function.
@@ -363,19 +377,31 @@ class Documents implements \IteratorAggregate {
     }
 
     /**
+     * Lets us call methods on the query class directly on the document
+     * class instance.  Like some David Copperfield shit...
      *
+     * @param $name
+     * @param $arguments
+     * @return $this
+     * @throws MontageException
      */
+    public function __call($name, $arguments)
+    {
+        if (method_exists($this->query, $name))
+        {
+            call_user_func_array([$this->query, $name], $arguments);
+            return $this;
+        }
+
+        throw new MontageException(sprintf('Could not find method "%s" as part of the docuemnt query.'));
+    }
+
     public function save(){}
 
-    /**
-     *
-     */
     public function get(){}
 
-    /**
-     *
-     */
     public function delete(){}
+
 }
 
 /**
@@ -422,21 +448,29 @@ class Query {
     public function execute()
     {
         $name = $this->schema->name;
-        $query = ['query' => ['query' => json_encode($this->descriptor)]];
-        $response = $this->montage->request('get', $this->montage->url('document-query', $name), $query);
+        $query = [
+            'query' => [
+                'query' => json_encode($this->descriptor)
+            ]
+        ];
+
+        //send the request
+        $response = $this->montage->request(
+            'get',
+            $this->montage->url('document-query', $name),
+            $query
+        );
+
         $this->cursors = $response->cursors;
         $this->data = $response->data;
     }
 
 
     /**
-     * Merge in a provided $config and return the result for passing
-     * over to the Montage API via a query string.
-     *
-     * @param $config
+     * @param array $config
      * @return array
      */
-    public function getDiscriptor($config)
+    public function getDiscriptor(array $config)
     {
         $defaults = [
             'filter' => [],
@@ -444,6 +478,7 @@ class Query {
             'offset' => null,
             'order_by' => null,
             'ordering' => 'asc',
+            'batch_size' => 1000
         ];
 
         return array_merge($defaults, $config);
@@ -453,11 +488,10 @@ class Query {
      * @param $config
      * @return Query
      */
-    public function update($config)
+    public function update(array $config)
     {
-        $descriptor = clone $this->descriptor;
-        $descriptor = array_merge($descriptor, $config);
-        return new Query($this->schema, $descriptor);
+        $newDescriptor = array_merge($this->descriptor, $config);
+        $this->descriptor = $this->getDiscriptor($newDescriptor);
     }
 
     /**
@@ -466,9 +500,7 @@ class Query {
      */
     public function filter(array $config)
     {
-        $filter = $this->descriptor->filter;
-        $filter = array_merge($filter, $config);
-        return $this->update(['filter' => $filter]);
+        $this->update($config);
     }
 
     /**
@@ -477,7 +509,7 @@ class Query {
      */
     public function limit($limit)
     {
-        return $this->update(['limit' => $limit]);
+        $this->update(['limit' => $limit]);
     }
 
     /**
@@ -486,7 +518,7 @@ class Query {
      */
     public function offset($offset)
     {
-        return $this->update(['offset' => $offset]);
+        $this->update(['offset' => $offset]);
     }
 
     /**
@@ -499,9 +531,12 @@ class Query {
     {
         if (!in_array($ordering, ['asc', 'desc']))
         {
-            throw new MontageException('$ordering must be asc or desc.');
+           throw new MontageException('$ordering must be one of "asc" or "desc".');
         }
 
-        return $this->update(['order_by' => $orderby, 'ordering' => $ordering]);
+        $this->update([
+            'order_by' => $orderby,
+            'ordering' => $ordering
+        ]);
     }
 }
