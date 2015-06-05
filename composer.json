@@ -8,10 +8,12 @@
     }
   ],
   "require": {
-    "guzzlehttp/guzzle": "dev-master"
+    "guzzlehttp/guzzle": "dev-master",
+    "mockery/mockery": "^0.9.4"
   },
   "require-dev": {
-    "phpdocumentor/phpdocumentor": "2.*"
+    "phpdocumentor/phpdocumentor": "2.*",
+    "phpunit/phpunit": "4.7.*"
   },
   "autoload": {
     "psr-4": {
