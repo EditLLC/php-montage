@@ -1,6 +1,5 @@
 <?php
 
-use Montage\Exceptions\MontageAuthException;
 use Montage\Montage;
 use Mockery as m;
 
@@ -21,7 +20,7 @@ class MontageTest extends PHPUnit_Framework_TestCase
      * @param null $version
      * @return Montage
      */
-    private function getMontage($subdomain, $token = null, $version = null)
+    private function getMontage($subdomain, $token = null, $version = 1)
     {
         return new Montage($subdomain, $token, $version);
     }
@@ -135,15 +134,17 @@ class MontageTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($montage->token, $this->token);
     }
 
-    /**
-     * @expectedException Montage\Exceptions\MontageAuthException
-     */
     public function testGetUserWithoutTokenThrowsException()
     {
+        $this->setExpectedException('Montage\Exceptions\MontageAuthException');
         $montage = $this->getMontage('foo');
         $montage->getUser();
     }
 
+    /**
+     * Test that the get user functions returns the result of a
+     * request.
+     */
     public function testGetUser()
     {
         $user = new stdClass;
@@ -151,6 +152,40 @@ class MontageTest extends PHPUnit_Framework_TestCase
         $montageUser = $montage->getUser();
 
         $this->assertEquals($montageUser, $user);
+    }
+
+    /**
+     * TODO: figure out why the exception isn't being propertly asserted.
+     */
+    public function testNoTokenResultsInException()
+    {
+//        $this->setExpectedException('Montage\Exceptions\MontageAuthException');
+//        $montage = $this->getMontage('foo');
+//        $montage->requireToken();
+    }
+
+    public function testUrlEndpoints()
+    {
+        $endpoints = [
+            [['auth'], 'api/v1/auth/'],
+            [['user'], 'api/v1/auth/user/'],
+            [['schema-list'], 'api/v1/schemas/'],
+            [['schema-detail', 'movies'], 'api/v1/schemas/movies/'],
+            [['document-query', 'movies'], 'api/v1/schemas/movies/query/'],
+            [['document-save', 'movies'], 'api/v1/schemas/movies/save/'],
+            [['document-detail', 'foo', 'bar'], 'api/v1/schemas/foo/bar/'],
+            [['file-list'], 'api/v1/files/'],
+            [['file-detail', 'bleep'], 'api/v1/files/bleep/'],
+        ];
+        $montage = $this->getMontage('foo');
+
+        foreach ($endpoints as $format)
+        {
+            $res = call_user_func_array([$montage, 'url'], $format[0]);
+            $this->assertEquals($format[1], $res);
+        }
+
+
     }
 
 }
