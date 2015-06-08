@@ -17,6 +17,11 @@ class Montage
     var $domain = 'dev.montagehot.club';
 
     /**
+     * @var string
+     */
+    var $token = '';
+
+    /**
      * @param $subdomain
      * @param null $token
      * @param int $version
@@ -67,7 +72,7 @@ class Montage
      */
     public function request($type, $url, $args = [])
     {
-        $response = $this->getGuzzleClient()
+        $response = $this->getHTTPClient()
             ->$type($url, $args)
             ->getBody()
             ->getContents();
@@ -150,8 +155,12 @@ class Montage
      */
     public function url($endpoint, $schema = null, $doc_id = null, $file_id = null)
     {
-        return sprintf('api/v%d/%s', $this->version, $this->endpoint($endpoint,
-            $schema, $doc_id, $file_id));
+        return sprintf('api/v%d/%s', $this->version, $this->endpoint(
+            $endpoint,
+            $schema,
+            $doc_id,
+            $file_id
+        ));
     }
 
     /**
@@ -160,7 +169,7 @@ class Montage
      *
      * @return Client
      */
-    private function getGuzzleClient()
+    private function getHTTPClient()
     {
         $config = [
             'base_uri' => sprintf(
