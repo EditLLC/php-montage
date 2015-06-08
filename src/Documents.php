@@ -3,6 +3,9 @@
 use Montage\Exceptions\MontageException;
 
 /**
+ * The documents class implements IteratorAggregate, making it simple to
+ * use as the basis of a loop.
+ *
  * Class Documents
  * @package Montage
  */

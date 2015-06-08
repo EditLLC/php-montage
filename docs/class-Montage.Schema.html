@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Montage\Schema</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Montage.html" title="Summary of Montage"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Montage.html">
+							Montage<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-Montage.Exceptions.html">
+							Exceptions						</a>
+							</li>
+								</ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Montage.Documents.html">Documents</a></li>
+				<li><a href="class-Montage.Montage.html">Montage</a></li>
+				<li><a href="class-Montage.Query.html">Query</a></li>
+				<li class="active"><a href="class-Montage.Schema.html">Schema</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class Schema</h1>
+
+
+	<div class="description">
+	<p>The Schema class allows access to a Montage schema as well as a
+way to access all the documents for a specific schema.</p>
+
+<p>Class Schema</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Montage.html">Montage</a><br>
+		<b>Package:</b> Montage<br>
+
+			<b>Located at</b> <a href="source-class-Montage.Schema.html#5-75" title="Go to source code">Schema.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__construct" id="___construct">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-Montage.Schema.html#24-32" title="Go to source code">__construct</a>( <span> <var>$name</var></span>, <span><code><a href="class-Montage.Montage.html">Montage\Montage</a></code> <var>$montage</var></span> )</code>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+						<dt><var>$montage</var></dt>
+						<dd></dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__get" id="___get">
+
+			<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___get">#</a>
+			<code><a href="source-class-Montage.Schema.html#34-52" title="Go to source code">__get</a>( <span> <var>$name</var></span> )</code>
+
+			<div class="description short">
+				<p>Allows for easy access to class methods without having to call them
+as a function.  This makes it possible to call functions like
+$schema->documents (which is an iterable) as the basis of
+a foreach loop, etc...</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Allows for easy access to class methods without having to call them
+as a function.  This makes it possible to call functions like
+$schema->documents (which is an iterable) as the basis of
+a foreach loop, etc...</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Montage.Exceptions.MontageException.html">Montage\Exceptions\MontageException</a></code>
+					</div>
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="detail" id="_detail">
+
+			<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_detail">#</a>
+			<code><a href="source-class-Montage.Schema.html#54-63" title="Go to source code">detail</a>( )</code>
+
+			<div class="description short">
+				<p>Returns the details of a specific Montage schema.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Returns the details of a specific Montage schema.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="documents" id="_documents">
+
+			<td class="attributes"><code>
+				 public 
+				<code><a href="class-Montage.Documents.html">Montage\Documents</a></code>
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_documents">#</a>
+			<code><a href="source-class-Montage.Schema.html#65-74" title="Go to source code">documents</a>( <span>array <var>$queryDescriptor</var> = []</span> )</code>
+
+			<div class="description short">
+				<p>Can be used as $schema->documents or $schema->documents($queryDescriptor)
+for more fine grained control.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Can be used as $schema->documents or $schema->documents($queryDescriptor)
+for more fine grained control.</p>
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code><a href="class-Montage.Documents.html">Montage\Documents</a></code>
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="montage" id="$montage">
+			<td class="attributes"><code>
+				public  
+				<code><a href="class-Montage.Montage.html">Montage\Montage</a></code>
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Montage.Schema.html#14-17" title="Go to source code"><var>$montage</var></a>
+
+				<div class="description short">
+					
+				</div>
+
+				<div class="description detailed hidden">
+					
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$montage" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="name" id="$name">
+			<td class="attributes"><code>
+				public  
+				
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Montage.Schema.html#19-22" title="Go to source code"><var>$name</var></a>
+
+				<div class="description short">
+					
+				</div>
+
+				<div class="description detailed hidden">
+					
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$name" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

@@ -3,6 +3,9 @@
 use Montage\Exceptions\MontageException;
 
 /**
+ * The Schema class allows access to a Montage schema as well as a
+ * way to access all the documents for a specific schema.
+ *
  * Class Schema
  * @package Montage
  */

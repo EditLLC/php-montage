@@ -6,6 +6,9 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Client;
 
 /**
+ * Our base Montage class.  All interactions with the Montage API happen
+ * through this class.
+ *
  * Class Montage
  * @package Montage
  */

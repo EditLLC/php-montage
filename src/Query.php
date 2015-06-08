@@ -3,6 +3,8 @@
 use Montage\Exceptions\MontageException;
 
 /**
+ * Sets up the actual queries used against the Montage API.
+ *
  * Class Query
  * @package Montage
  */
