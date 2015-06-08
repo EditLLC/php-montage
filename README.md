@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/ggoforth/php-montage/badges/gpa.svg)](https://codeclimate.com/github/ggoforth/php-montage)
+
 # PHP Wrapper for Edit LLC's Montage API
 
 This is a PHP wrapper class that gives easy access to Edit LLC's Montage API.
