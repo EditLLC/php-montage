@@ -2,11 +2,11 @@
 
 This is a PHP wrapper class that gives easy access to Edit LLC's Montage API.
 
-## Requirements
+### Requirements
 
 PHP >= 5.5.0
 
-## Usage
+### Usage
 
 ```
 require "vendor/autoload.php";
@@ -65,7 +65,7 @@ foreach ($moviesSchema->documents($queryDescriptor) as $movie) {
 }
 ```
 
-## CRUD Operations:
+### CRUD Operations:
 
 The `documents` property of any schema holds the CRUD functions.  For instance:
 
