@@ -6,7 +6,7 @@ This is a PHP wrapper class that gives easy access to Edit LLC's Montage API.
 
 ### Requirements
 
-PHP >= 5.5.0
+PHP >= 5.5.0 (uses generators)
 
 ### Usage
 
