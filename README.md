@@ -109,7 +109,6 @@ class.  To run the tests:
 
 * More test coverage
 * Laravel Service Provider
-* Transfer ownership to [Edit LLC](https://github.com/EditLLC)
 
 ### Contributing
 
