@@ -96,4 +96,18 @@ $movies->documents->update($movie->id, $movie);
 $movies->documents->delete($movie->id);
 ```
 
+### Tests
+ 
+Tests are available and more will be added as time permits.  Most test coverage is currently focused on the `Montage` 
+class.  To run the tests:
 
+`./vendor/phpunit/phpunit/phpunit ./tests`
+
+### Roadmap
+
+* More test coverage
+* Laravel Service Provider
+* Transfer ownership to [Edit LLC](https://github.com/EditLLC)
+
+    
+   
