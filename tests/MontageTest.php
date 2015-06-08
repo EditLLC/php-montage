@@ -184,8 +184,5 @@ class MontageTest extends PHPUnit_Framework_TestCase
             $res = call_user_func_array([$montage, 'url'], $format[0]);
             $this->assertEquals($format[1], $res);
         }
-
-
     }
-
 }

@@ -30,6 +30,7 @@ class Documents implements \IteratorAggregate {
     {
         $this->queryDescriptor = $queryDescriptor;
         $this->schema = $schema;
+        $this->montage = $schema->montage;
         $this->query = new Query($schema, $queryDescriptor);
     }
 
@@ -85,18 +86,62 @@ class Documents implements \IteratorAggregate {
     }
 
     /**
+     * Persist one or more document objects to montage.
      *
+     * @param $doc
+     * @return mixed
      */
-    public function save(){}
+    public function save($doc)
+    {
+        return $this->montage->request(
+            'post',
+            $this->montage->url('document-save', $this->schema->name),
+            ['body' => json_encode($doc)]
+        );
+    }
 
     /**
+     * Get a single document by it's ID from montage.
      *
+     * @param $docId
+     * @return mixed
      */
-    public function get(){}
+    public function get($docId)
+    {
+        return $this->montage->request(
+            'get',
+            $this->montage->url('document-detail', $this->schema->name, $docId)
+        );
+    }
 
     /**
+     * Update a document with a given $docId with new details.
      *
+     * @param $docId
+     * @param $doc
+     * @return mixed
      */
-    public function delete(){}
+    public function update($docId, $doc)
+    {
+        return $this->montage->request(
+            'post',
+            $this->montage->url('document-detail', $this->schema->name, $docId),
+            ['body' => json_encode($doc)]
+        );
+    }
+
+    /**
+     * Delete a record with montage.
+     *
+     * @param $docId
+     * @return mixed
+     */
+    public function delete($docId)
+    {
+        return $this->montage->request(
+            'delete',
+            $this->montage->url('document-detail', $this->schema->name, $docId)
+        );
+    }
 
 }

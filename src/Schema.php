@@ -30,7 +30,9 @@ class Schema
 
     /**
      * Allows for easy access to class methods without having to call them
-     * as a function.
+     * as a function.  This makes it possible to call functions like
+     * $schema->documents (which is an iterable) as the basis of
+     * a foreach loop, etc...
      *
      * @param $name
      * @return mixed
@@ -58,8 +60,8 @@ class Schema
     }
 
     /**
-     * Can be used as $schema->documents or $schema->documents($queryDescriptor) for
-     * more fine grained control.
+     * Can be used as $schema->documents or $schema->documents($queryDescriptor)
+     * for more fine grained control.
      *
      * @return Documents
      */

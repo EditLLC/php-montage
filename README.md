@@ -1,7 +1,6 @@
 # PHP Wrapper for Edit LLC's Montage API
 
-This is a PHP wrapper class that gives easy access to Edit LLC's Montage API.  Note: this is **very much an alpha package
-and not all functions of the package are complete**. Useage:
+This is a PHP wrapper class that gives easy access to Edit LLC's Montage API. Useage:
 
 ```
 require "vendor/autoload.php";
@@ -10,6 +9,9 @@ use Montage\Montage;
 
 //get an authenticated instance of the Montage wrapper
 $montage = (new Montage('yourSubdomain'))->auth($username, $password);
+
+//or if you have a token already
+$montage = new Montage('yourSubdomain', $token);
 
 //get a MontageSchema instance 
 $moviesSchema = $montage->schema('movies');
@@ -28,12 +30,8 @@ The token is required for making calls against the api, and is sent on all api r
 If you already posess a Montage API token you can construct the `Montage` instance by providing your token and bypass 
 the need to call the `auth` function.
 
-```
-$montage = new Montage('yourSubdomain', $token);
-```
-
-If you need to provide more fine grained control you can call documents as a function and pass to a `$queryDescriptor` 
-as an array.  Possible array members for a `$queryDescriptor` include:
+If you need to provide more fine grained control you can call documents as a function and pass to it a 
+`$queryDescriptor` as an array.  Possible array members for a `$queryDescriptor` include:
 
 ```
 [
@@ -61,5 +59,35 @@ foreach ($moviesSchema->documents($queryDescriptor) as $movie) {
 }
 ```
 
+## CRUD Operations:
+
+The `documents` property of any schema holds the CRUD functions.  For instance:
+
+```
+$montage = new Montage('yourSubdomain', $token);
+$movies = $montage->movies();
+
+//Create a new movie object / array.  Fields must match the Schema already configured in montage.
+$movie = new stdClass;
+$movie->title = 'Gleaming the Cube';
+$movie->year = 1989;
+$movie->rank = 550;
+
+//persist a new movie to montage
+$movie = $movies->documents->save($movie);
+
+//Montage will return an array of all movies created as it's possible to create more than one object at a time.
+$movie = $movie->data[0]; 
+
+//get the movie from montage
+$movies->documents->get($movie->id);
+
+//update the movie in montage
+$movie->title = $movie->title . ' - You wish you could skate like them.';
+$movies->documents->update($movie->id, $movie);
+
+//delete the movie
+$movies->documents->delete($movie->id);
+```
 
 
