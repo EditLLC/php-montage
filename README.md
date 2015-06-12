@@ -38,31 +38,15 @@ The token is required for making calls against the api, and is sent on all api r
 If you already posess a Montage API token you can construct the `Montage` instance by providing your token and bypass 
 the need to call the `auth` function.
 
-If you need to provide more fine grained control you can call documents as a function and pass to it a 
-`$queryDescriptor` as an array.  Possible array members for a `$queryDescriptor` include:
+If you need to provide more fine grained control you can call the `filter`, `limit`, `offset` and `orderBy` functions provided on the documents property. 
 
 ```
-[
-    'filter' => [],
-    'limit' => null,
-    'offset' => null,
-    'order_by' => null,
-    'ordering' => 'asc|desc',
-    'batch_size' => 1000,
-]
-```
+$movieSchema->documents->filter(['title__icontains' => 'Jurassic']); //case insensitive title search
+$movieSchema->documents->limit(5);
+$movieSchema->documents->orderBy('title', 'desc');
+$movieSchema->documents->offset(5);
 
-Documents called as a function can look like:
-
-```
-$queryDescriptor = [
-    'limit' => 5,
-    'filter' => [
-        'title__icontains' => 'the'
-    ]
-];
-
-foreach ($moviesSchema->documents($queryDescriptor) as $movie) {
+foreach ($moviesSchema->documents as $movie) {
     echo sprintf("Movie Title: %s\n", $movie->title);
 }
 ```
