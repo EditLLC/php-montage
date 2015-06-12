@@ -97,7 +97,7 @@ class Query {
      */
     public function filter(array $config)
     {
-        $this->update($config);
+        $this->update(['filter' => $config]);
     }
 
     /**
