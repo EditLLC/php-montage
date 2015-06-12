@@ -17,11 +17,6 @@ class Documents implements \IteratorAggregate {
     public $documents = [];
 
     /**
-     * @var array
-     */
-    private $queryDescriptor;
-
-    /**
      * @var Schema
      */
     private $schema;
@@ -29,12 +24,11 @@ class Documents implements \IteratorAggregate {
     /**
      * @param Schema $schema
      */
-    public function __construct($queryDescriptor = [], Schema $schema)
+    public function __construct(Schema $schema)
     {
-        $this->queryDescriptor = $queryDescriptor;
         $this->schema = $schema;
         $this->montage = $schema->montage;
-        $this->query = new Query($schema, $queryDescriptor);
+        $this->query = new Query($schema);
     }
 
     /**
